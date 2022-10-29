@@ -83,4 +83,14 @@ class ClientController extends Controller
     {
         //
     }
+
+    public function client(){
+        
+        $message = "Welcome to home page";
+        return view('client.clientCreate')->with('message', $message);
+    }
+
+    
+
+    
 }

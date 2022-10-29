@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
+use Illuminate\Http\Request;
+
 
 class CustomerController extends Controller
 {
@@ -83,4 +85,37 @@ class CustomerController extends Controller
     {
         //
     }
-}
+
+    public function customer(){
+        
+        $message = "Welcome to customer page";
+        return view('customer.customerCreate')->with('message', $message);
+    }
+
+    public function customerCreateSubmitted(Request $request)
+    {
+        $validate = $request->validate([
+            "name"=>"required|min:5|max:20",
+            "id"=>"required",
+            'password'=>'required',
+            'email'=>'email',
+        ],
+        ['name.required'=>"Please put you name here"]
+    );
+        $customer = new  Customer();
+        $customer->name = $request->name;
+        $customer->id = $request->id;
+        $customer->email = $request->email;
+        $customer->password=$request->password;
+        $customer->address=$request->address;
+        $customer->phone=$request->phone;
+        $customer->save();
+
+        return redirect('/home');
+    }
+
+    }
+
+
+    
+

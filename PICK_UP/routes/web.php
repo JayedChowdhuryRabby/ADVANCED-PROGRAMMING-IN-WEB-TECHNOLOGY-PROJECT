@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PagesController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CustomerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +19,7 @@ Route::get('/', function () {
     return view('welcome');
     
 });
-Route::get('/home',function(){
-    return view('home');
-});
+Route::get('/home', [PagesController::class, 'home'])->name('home');
+Route::get('/client', [ClientController::class, 'client'])->name('clientCreate');
+Route::get('/customerCreate', [CustomerController::class, 'customer'])->name('customerCreate');
+Route::post('/customerCreate',[CustomerController::class, 'customerCreateSubmitted'])->name('customerCreateSubmitted');
