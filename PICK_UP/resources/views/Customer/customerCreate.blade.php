@@ -1,4 +1,5 @@
 @extends('layouts.app')
+<br>
 @section('content')
 <h2>Create customer</h2>
 <form action="{{route('customerCreate')}}" class="form-group" method="post">
