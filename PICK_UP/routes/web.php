@@ -5,6 +5,8 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,12 +17,6 @@ use App\Http\Controllers\LoginController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-    
-});
-Route::get('/home', [PagesController::class, 'home'])->name('home');
 Route::get('/client', [ClientController::class, 'client'])->name('clientCreate');
 //customer registration
 Route::get('/customerCreate', [CustomerController::class, 'customer'])->name('customerCreate');
@@ -30,5 +26,18 @@ Route::get('/login',[LoginController::class,'login'])->name('login');
 Route::post('/login',[LoginController::class,'loginSubmit'])->name('login');
 Route::get('/logout',[LoginController::class,'logout'])->name('logout');
 
+// Add Product
+Route::get('/addProduct',[ProductController::class,'addProduct'])->name('addProduct');
+Route::post('/addProduct',[ProductController::class,'addProductSubmit'])->name('addProduct');
+
+/**product routes */
+Route::get('/products/list',[ProductController::class,'list'])->name('products.list');
+Route::get('/addtocart',[ProductController::class,'addtocart'])->name('products.addtocart');
+Route::get('/emptycart',[ProductController::class,'emptycart'])->name('products.emptycart');
+Route::get('/cart',[ProductController::class,'mycart'])->name('products.mycart');
+Route::post('/checkout',[ProductController::class,'checkout'])->middleware('ValidCustomer')->name('checkout');
+/**product routes end */
+Route::get('/customer/myorders',[CustomerController::class,'myorders'])->middleware('ValidCustomer')->name('customer.myorders');
+Route::get('/customer/myorders/details',[CustomerController::class,'orderdetails'])->middleware('ValidCustomer')->name('customer.myorders.details');
 
 Route::get('/teacher/dash', [CustomerController::class,'customerDash'])->name('customerDash')->middleware('ValidCustomer');

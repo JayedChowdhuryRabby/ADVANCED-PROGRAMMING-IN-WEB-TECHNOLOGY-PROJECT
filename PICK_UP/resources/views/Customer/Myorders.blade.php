@@ -1,4 +1,5 @@
 @extends('layouts.app')
+<br>
 @section('content')
     <table class="table table-bordered">
         <tr>
