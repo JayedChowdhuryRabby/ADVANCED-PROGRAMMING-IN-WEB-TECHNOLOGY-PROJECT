@@ -3,7 +3,7 @@
 
 @section('content')
 <div>
-    Hello World
+    Registration Successful
     <br>
     {{$message}}
 </div>

@@ -7,7 +7,7 @@
         <div class="container">
             @include('inc.topnav')
             <br>
-            Welcome to pick up
+           
             <div>
                 @yield('content')
             </div>
