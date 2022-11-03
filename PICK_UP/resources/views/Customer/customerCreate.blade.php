@@ -1,6 +1,7 @@
 @extends('layouts.app')
+<br>
 @section('content')
-<h2>Create customer</h2>
+<h2></h2>
 <form action="{{route('customerCreate')}}" class="form-group" method="post">
     <!-- Cross Site Request Forgery-->
     {{csrf_field()}}
@@ -54,7 +55,7 @@
             <span class="text-danger">{{$message}}</span>
         @enderror
     </div>
-    
-    <input type="submit" class="btn btn-success" value="Add" >                  
+     <br>
+    <input type="submit" class="btn btn-success" value="SIGN UP" >                  
 </form>
 @endsection 

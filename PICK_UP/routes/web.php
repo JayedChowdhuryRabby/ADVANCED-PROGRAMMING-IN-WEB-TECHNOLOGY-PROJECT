@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,9 +21,6 @@ Route::get('/', function () {
     
 });
 Route::get('/home', [PagesController::class, 'home'])->name('home');
-Route::get('/clientCreate', [ClientController::class, 'client'])->name('clientCreate');
-Route::post('/clientCreate',[ClientController::class, 'clientCreateSubmitted'])->name('clientCreateSubmitted');
+Route::get('/client', [ClientController::class, 'client'])->name('clientCreate');
 Route::get('/customerCreate', [CustomerController::class, 'customer'])->name('customerCreate');
 Route::post('/customerCreate',[CustomerController::class, 'customerCreateSubmitted'])->name('customerCreateSubmitted');
-
-

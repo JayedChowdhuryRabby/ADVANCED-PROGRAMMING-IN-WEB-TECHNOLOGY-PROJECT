@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Login;
 use App\Http\Requests\StoreLoginRequest;
 use App\Http\Requests\UpdateLoginRequest;
+use Illuminate\Http\Request;
+use App\Models\Customer;
 
 class LoginController extends Controller
 {
@@ -83,4 +85,28 @@ class LoginController extends Controller
     {
         //
     }
+    public function Login()
+    {
+        return view('customer.login');
+    }
+    public function loginSubmit(Request $request)
+    {
+        $customer= Customer::where('email',$request->email)
+                             ->where('password',$request->password)
+                             ->first();
+        
+        if($customer){
+            $request->session()->put('user',$customer->name);
+            
+            return redirect()->route('customerDash');
+        }
+        
+        return back();
+    }
+    public function logout()
+    {
+        session()->forget('user');
+        return redirect()->route('login');
+    }
+    
 }
