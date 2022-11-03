@@ -22,9 +22,13 @@ Route::get('/', function () {
 });
 Route::get('/home', [PagesController::class, 'home'])->name('home');
 Route::get('/client', [ClientController::class, 'client'])->name('clientCreate');
+//customer registration
 Route::get('/customerCreate', [CustomerController::class, 'customer'])->name('customerCreate');
 Route::post('/customerCreate',[CustomerController::class, 'customerCreateSubmitted'])->name('customerCreateSubmitted');
 //customer login and logout
 Route::get('/login',[LoginController::class,'login'])->name('login');
 Route::post('/login',[LoginController::class,'loginSubmit'])->name('login');
 Route::get('/logout',[LoginController::class,'logout'])->name('logout');
+
+
+Route::get('/teacher/dash', [CustomerController::class,'customerDash'])->name('customerDash')->middleware('ValidCustomer');

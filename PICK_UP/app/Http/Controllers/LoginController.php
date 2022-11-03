@@ -97,7 +97,8 @@ class LoginController extends Controller
         
         if($customer){
             $request->session()->put('user',$customer->name);
-            return redirect()->route('home');
+            
+            return redirect()->route('customerDash');
         }
         
         return back();
@@ -105,7 +106,7 @@ class LoginController extends Controller
     public function logout()
     {
         session()->forget('user');
-        return redirect()-route('login');
+        return redirect()->route('login');
     }
     
 }
