@@ -103,7 +103,7 @@ class ClientController extends Controller
     );
         $client = new  Client();
         $client->name = $request->name;
-        //$client->shopname = $request->shopname;
+        $client->shopname = $request->shopname;
         //$client->id = $request->id;
         $client->email = $request->email;
         $client->address=$request->address;
@@ -113,6 +113,11 @@ class ClientController extends Controller
 
         return redirect('/home');
     }
+    public function clientDash(){
+        return view('client.clientDash');
+
+    }
+
 
 
     

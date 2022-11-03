@@ -3,9 +3,9 @@
 
 @section('content')
 <div>
-    Registration Successful
     <br>
-    {{$message}}
+   <center> <h1>Registration Successful</h1></center>
+  
 </div>
 @endsection
 

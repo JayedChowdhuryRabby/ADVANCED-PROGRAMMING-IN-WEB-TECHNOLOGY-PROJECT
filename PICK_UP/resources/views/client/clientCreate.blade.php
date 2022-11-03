@@ -26,6 +26,15 @@
         @enderror
     </div>
 
+    <div class="col-md-4 form-group">
+        <span>Shop name</span>
+        <input type="text" name="shopname" value="{{old('shopname')}}" class="form-control">
+        @error('shopname')
+            <span class="text-danger">{{$message}}</span>
+        @enderror
+    </div>
+
+
    
     <div class="col-md-4 form-group">
         <span>Email</span>
