@@ -26,7 +26,7 @@
     </div>
     <div class="col-md-4 form-group">
         <span>Id</span>
-        <input type="text" name="id" value="{{old('id')}}"class="form-control">
+        <input type="text" name="customer_id" value="{{old('customer_id')}}"class="form-control">
         @error('id')
             <span class="text-danger">{{$message}}</span>
         @enderror

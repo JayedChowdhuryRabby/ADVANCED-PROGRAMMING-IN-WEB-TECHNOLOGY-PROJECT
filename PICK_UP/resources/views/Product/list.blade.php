@@ -1,4 +1,5 @@
-@extends('layouts.single')
+@extends('layouts.app')
+<br>
 @section('content')
     <div class="col-md-3">
         @foreach ($products as $item)
@@ -7,13 +8,9 @@
                 <div class="card-body">
                 <p class="card-text text-center">{{$item->name}}<br>
                 <span>Price: BDT{{$item->price}}</span><br>
-                <span>Product Id: {{$item->id}}</span><br>
+                <a href="{{route('products.addtocart',['id'=>$item->id])}}" class="btn btn-primary" style="color:white">Add to Cart</a></p>
                 </div>
-                <br>
-                
             </div>
         @endforeach
     </div>       
-    <a class="btn btn-danger" href="{{route('logout')}}">Log out </a>
-
 @endsection 

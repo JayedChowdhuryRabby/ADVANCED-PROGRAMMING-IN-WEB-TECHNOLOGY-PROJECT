@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Order;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
 use Illuminate\Http\Request;
@@ -96,7 +97,7 @@ class CustomerController extends Controller
     {
         $validate = $request->validate([
             "name"=>"required|min:5|max:30",
-            "id"=>"required",
+            "customer_id"=>"required",
             'password'=>'required',
             'email'=>'email',
         ],
@@ -104,14 +105,14 @@ class CustomerController extends Controller
     );
         $customer = new  Customer();
         $customer->name = $request->name;
-        $customer->id = $request->id;
+        $customer->customer_id = $request->customer_id;
         $customer->email = $request->email;
         $customer->password=$request->password;
         $customer->address=$request->address;
         $customer->phone=$request->phone;
         $customer->save();
 
-        return redirect('/home');
+        return redirect('login');
     }
 
     public function customerDash(){
@@ -122,7 +123,7 @@ class CustomerController extends Controller
     public function myOrders(){
         $customer_id = session()->get('user');
         $orders = Order::where('customer_id',$customer_id)->get();
-        return view('pages.customer.myorders')->with('orders',$orders);
+        return view('customer.myorders')->with('orders',$orders);
     }
 
     
@@ -130,7 +131,7 @@ class CustomerController extends Controller
         $id = $request->id;
         $order = Order::where('id',$id)->first();
         //return $order->products[0]->order->customer;
-        return view('pages.customer.orderdetails')->with('order',$order);
+        return view('customer.orderdetails')->with('order',$order);
     }
 
 }

@@ -6,6 +6,8 @@ use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Http\Request;
+use App\Models\Order;
+use App\Models\Orderdetail;
 
 class ProductController extends Controller
 {
@@ -84,17 +86,78 @@ class ProductController extends Controller
     {
         //
     }
-    public function productlist(){
+    public function list(){
 
-        $price = session()->get('userclient');
         $products = Product::all();
-        return view('product.productlist')->with('products',$products);
+        return view('product.list')->with('products',$products);
+
+    }
+    public function addtocart(Request $req){
+        $id = $req->id;
+        $p = Product::where('id',$id)->first();
+        $cart=[];
+        //$jsonCart = $req->session()->get('cart'); to get session value
+        //session()->get('cart')
+        if(session()->has('cart')){
+            $cart = json_decode(session()->get('cart'));
+        }
+        $product = array('id'=>$id,'qty'=>1,'name'=>$p->name,'price'=>$p->price,'image'=>$p->image);
+        $cart[] = (object)($product);
+        $jsonCart = json_encode($cart);
+        session()->put('cart',$jsonCart);
+        // return session()->get('cart');
+        return redirect()->route('products.list');
+    }
+    public function emptycart(){
+        session()->forget('cart');
+        if(!session()->has('cart')){
+            return redirect()->route('products.mycart');
+        }
+        return session('cart');
+
+    }
+    public function mycart(){
+        $cart = json_decode(session()->get('cart'));
+        return view('customer.cart')
+        ->with('cart',$cart);
+    }
+    public function checkout(Request $req){
+        //let when logged in there will be a field in session
+        $products = json_decode(session()->get('cart'));
+        //creating order
+        $customer_id= session()->get('user');
+        $name= session()->get('userName');
+        $order = new Order();
+        $order->customer_id =$customer_id;
+        $order->name=$name;
+        $order->status="Ordered";
+        $order->price = $req->total_price;
+        $order->save();
+
+        //creating order details
+        foreach($products as $p){
+            $o_d = new OrderDetail();
+            $o_d->order_id = $order->id;
+            $o_d->product_id = $p->id;
+            $o_d->quantity = $p->qty;
+            $o_d->unit_price = $p->price;
+            $o_d->image= $p->image;
+            $o_d->name= $p->name;
+            $o_d->save();
+        }
+
+        session()->forget('cart');
+
+        return "Pruchase Done!";
+
 
     }
 
     public function addProduct(){
         return view('product.addProduct');
     }
+
+
     public function addProductSubmit(Request $request){
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -103,7 +166,6 @@ class ProductController extends Controller
         $p = new Product();
         $p->name=$request->name;
         $p->price=$request->price;
-        $p->id=$request->id;
 
         if($request->hasFile('image')){
             $imageName = time()."_".$request->file('image')->getClientOriginalName();
@@ -117,5 +179,4 @@ class ProductController extends Controller
         /* Store $imageName name in DATABASE from HERE */
         return "No file";
     }
-
 }

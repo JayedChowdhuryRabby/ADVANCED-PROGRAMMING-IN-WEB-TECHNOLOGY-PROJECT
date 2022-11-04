@@ -97,8 +97,8 @@ class LoginController extends Controller
                              ->first();
         
         if($customer){
-            $request->session()->put('user',$customer->name);
-            
+            $request->session()->put('user',$customer->customer_id);
+            $request->session()->put('userName',$customer->name);
             return redirect()->route('customerDash');
         }
         $client= Client::where('email',$request->email)
