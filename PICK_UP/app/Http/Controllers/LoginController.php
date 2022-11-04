@@ -7,7 +7,7 @@ use App\Http\Requests\StoreLoginRequest;
 use App\Http\Requests\UpdateLoginRequest;
 use Illuminate\Http\Request;
 use App\Models\Customer;
-
+use App\Models\Client;
 class LoginController extends Controller
 {
     /**
@@ -100,12 +100,23 @@ class LoginController extends Controller
             $request->session()->put('userName',$customer->name);
             return redirect()->route('customerDash');
         }
-        
+
+        $client= Client::where('email',$request->email)
+        ->where('password',$request->password)
+        ->first();
+
+        if($client){
+        $request->session()->put('userClient',$client->name);
+
+        return redirect()->route('clientDash');
+        }
+                
         return back();
     }
     public function logout()
     {
         session()->forget('user');
+        session()->forget('userClient');
         return redirect()->route('login');
     }
     

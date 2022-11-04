@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
-
+use Illuminate\Http\Request;
 class ClientController extends Controller
 {
     /**
@@ -86,9 +86,38 @@ class ClientController extends Controller
 
     public function client(){
         
-        $message = "Welcome to home page";
+        $message = "";
         return view('client.clientCreate')->with('message', $message);
     }
+    
+    public function clientCreateSubmitted(Request $request)
+    {
+        $validate = $request->validate([
+            "name"=>"required|min:5|max:20",
+            //"id"=>"required",
+            'password'=>'required',
+            'email'=>'email',
+        ],
+        ['name.required'=>"Please put you name here"]
+    );
+        $client = new  Client();
+        $client->name = $request->name;
+        $client->shopname = $request->shopname;
+        //$client->id = $request->id;
+        $client->email = $request->email;
+        $client->address=$request->address;
+        $client->mobileNumber=$request->mobileNumber;
+        $client->password=$request->password;
+        $client->save();
+
+        return redirect('customer.login');
+    }
+    public function clientDash(){
+        return view('client.clientDash');
+
+    }
+
+
 
     
 
