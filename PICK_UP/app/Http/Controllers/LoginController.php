@@ -106,7 +106,7 @@ class LoginController extends Controller
                              ->first();
         
         if($client){
-            $request->session()->put('user',$client->name);
+            $request->session()->put('userclient',$client->name);
             
             return redirect()->route('clientDash');
         }
@@ -115,7 +115,10 @@ class LoginController extends Controller
     public function logout()
     {
         session()->forget('user');
+        session()->forget('userclient');
         return redirect()->route('login');
+
+
     }
 
     

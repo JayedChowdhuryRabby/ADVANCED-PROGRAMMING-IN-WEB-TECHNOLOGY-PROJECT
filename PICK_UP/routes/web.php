@@ -36,7 +36,7 @@ Route::get('/logout',[LoginController::class,'logout'])->name('logout');
 //product add
 Route::get('/addProduct',[ProductController::class,'addProduct'])->name('addProduct');
 Route::post('/addProduct',[ProductController::class,'addProductSubmit'])->name('addProduct');
-Route::get('/products/list',[ProductController::class,'list'])->name('products.list');
+Route::get('/products/productlist',[ProductController::class,'productlist'])->name('products.list');
 
 
 Route::get('/teacher/dash', [CustomerController::class,'customerDash'])->name('customerDash')->middleware('ValidCustomer');

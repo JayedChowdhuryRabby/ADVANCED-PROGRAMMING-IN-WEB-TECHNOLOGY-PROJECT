@@ -84,10 +84,11 @@ class ProductController extends Controller
     {
         //
     }
-    public function list(){
+    public function productlist(){
 
+        $price = session()->get('userclient');
         $products = Product::all();
-        return view('product.list')->with('products',$products);
+        return view('product.productlist')->with('products',$products);
 
     }
 
