@@ -8,14 +8,11 @@
 <a class="btn btn-primary" href="{{route('addProduct')}}"> Add Product </a>
 <a class="btn btn-primary" href="{{route('products.list')}}">Products</a>
 <a class="btn btn-primary" href="{{route('clientDash')}}"> DashBoard </a>
-<<<<<<< HEAD
 @elseif(Session::has('userAdmin'))
 <a class="btn btn-primary" href="{{route('adminDash')}}"> DashBoard </a>
 <a class="btn btn-primary" href="{{route('customerList')}}"> Customer List </a>
 <a class="btn btn-primary" href="{{route('clientList')}}"> Client List </a>
-=======
 
->>>>>>> Rabby
 @else
 <a class="btn btn-primary" href="{{route('products.list')}}">Products</a>
 <a class="btn btn-primary" href="{{route('products.mycart')}}"> Cart </a>
