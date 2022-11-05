@@ -110,16 +110,13 @@ class ClientController extends Controller
         $client->password=$request->password;
         $client->save();
 
-        return redirect('customer.login');
+        return redirect('login');
     }
     public function clientDash(){
         return view('client.clientDash');
 
     }
-
-
-
-    
+        
 
     
 }

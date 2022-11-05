@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateLoginRequest;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\Client;
+use App\Models\Admin;
 class LoginController extends Controller
 {
     /**
@@ -91,9 +92,18 @@ class LoginController extends Controller
     }
     public function loginSubmit(Request $request)
     {
+        $admin= Admin::where('email',$request->email)
+        ->where('password',$request->password)
+        ->first();
+
+        if($admin){
+            $request->session()->put('userAdmin',$admin->id);
+            $request->session()->put('adminName',$admin->name);
+        return redirect()->route('adminDash');
+        }
         $customer= Customer::where('email',$request->email)
-                             ->where('password',$request->password)
-                             ->first();
+                                    ->where('password',$request->password)
+                                    ->first();
         
         if($customer){
             $request->session()->put('user',$customer->customer_id);
@@ -117,6 +127,7 @@ class LoginController extends Controller
     {
         session()->forget('user');
         session()->forget('userClient');
+        session()->forget('userAdmin');
         return redirect()->route('login');
     }
     

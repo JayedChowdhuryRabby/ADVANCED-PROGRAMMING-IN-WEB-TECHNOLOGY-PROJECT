@@ -6,6 +6,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,5 +42,23 @@ Route::post('/checkout',[ProductController::class,'checkout'])->middleware('Vali
 Route::get('/customer/myorders',[CustomerController::class,'myorders'])->middleware('ValidCustomer')->name('customer.myorders');
 Route::get('/customer/myorders/details',[CustomerController::class,'orderdetails'])->middleware('ValidCustomer')->name('customer.myorders.details');
 
-Route::get('/teacher/dash', [CustomerController::class,'customerDash'])->name('customerDash')->middleware('ValidCustomer');
+Route::get('/customer/dash', [CustomerController::class,'customerDash'])->name('customerDash')->middleware('ValidCustomer');
 Route::get('/client/dash', [clientController::class,'clientDash'])->name('clientDash');
+Route::get('/admin/dash', [AdminController::class,'adminDash'])->name('adminDash');
+Route::get('/admin/clientList', [AdminController::class,'clientList'])->name('clientList');
+Route::get('/admin/customerList', [AdminController::class,'customerList'])->name('customerList');
+
+Route::get('/cutomerDelete/{name}',[AdminController::class, 'customerDelete'])->name('customerDelete');
+Route::get('/clients/clientDelete',[AdminController::class,'clientDelete'])->name('clients.clientDelete');
+
+Route::get('/clientEdit/{id}',[AdminController::class, 'clientEdit'])->name('clientEdit');
+Route::post('/clientEdit',[AdminController::class, 'clientEditSubmitted'])->name('clientEdit');
+
+Route::get('/customerEdit/{customer_id}',[AdminController::class, 'customerEdit'])->name('customerEdit');
+Route::post('/customerEdit',[AdminController::class, 'customerEditSubmitted'])->name('customerEdit');
+
+
+
+
+
+

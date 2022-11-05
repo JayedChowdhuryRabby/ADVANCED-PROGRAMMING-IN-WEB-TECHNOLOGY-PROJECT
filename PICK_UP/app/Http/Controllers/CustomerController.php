@@ -112,7 +112,7 @@ class CustomerController extends Controller
         $customer->phone=$request->phone;
         $customer->save();
 
-        return redirect('customer.login');
+        return redirect('login');
     }
 
     public function customerDash(){
@@ -134,6 +134,7 @@ class CustomerController extends Controller
         return view('customer.orderdetails')->with('order',$order);
     }
 
+    
 }
 
 
