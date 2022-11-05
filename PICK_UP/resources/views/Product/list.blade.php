@@ -8,9 +8,20 @@
                 <div class="card-body">
                 <p class="card-text text-center">{{$item->name}}<br>
                 <span>Price: BDT{{$item->price}}</span><br>
+                @if(Session::has('user'))
                 <a href="{{route('products.addtocart',['id'=>$item->id])}}" class="btn btn-primary" style="color:white">Add to Cart</a></p>
-                </div>
+                @elseif(Session::has('userClient'))
+                <a href="{{route('products.productdelete',['price'=>$item->price])}}" class="btn btn-primary" style="color:white">Product Detete</a></p>
+                
+                @else
+                <a href="{{route('products.addtocart',['id'=>$item->id])}}" class="btn btn-primary" style="color:white">Add to Cart</a></p>
+                
+                
+                @endif
+        
+            </div>
             </div>
         @endforeach
-    </div>       
+    </div>  
+         
 @endsection 

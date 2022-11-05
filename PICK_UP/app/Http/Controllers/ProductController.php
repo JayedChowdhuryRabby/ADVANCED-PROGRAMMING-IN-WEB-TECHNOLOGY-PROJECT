@@ -178,4 +178,12 @@ class ProductController extends Controller
         /* Store $imageName name in DATABASE from HERE */
         return "No file";
     }
+    public function productdelete(Request $request){
+        $product = Product::where('price', $request->price)->first();
+        $product->delete();
+
+        return redirect()->route('products.list');
+    }
+    
+    
 }

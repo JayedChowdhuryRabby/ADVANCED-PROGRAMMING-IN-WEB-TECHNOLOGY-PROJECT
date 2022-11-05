@@ -30,6 +30,7 @@ Route::get('/logout',[LoginController::class,'logout'])->name('logout');
 // Add Product
 Route::get('/addProduct',[ProductController::class,'addProduct'])->name('addProduct');
 Route::post('/addProduct',[ProductController::class,'addProductSubmit'])->name('addProduct');
+Route::get('/products/productdelete',[ProductController::class,'productdelete'])->name('products.productdelete');
 
 /**product routes */
 Route::get('/products/list',[ProductController::class,'list'])->name('products.list');

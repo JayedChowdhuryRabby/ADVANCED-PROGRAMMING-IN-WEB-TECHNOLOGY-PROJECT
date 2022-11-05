@@ -8,6 +8,7 @@
 <a class="btn btn-primary" href="{{route('addProduct')}}"> Add Product </a>
 <a class="btn btn-primary" href="{{route('products.list')}}">Products</a>
 <a class="btn btn-primary" href="{{route('clientDash')}}"> DashBoard </a>
+
 @else
 <a class="btn btn-primary" href="{{route('products.list')}}">Products</a>
 <a class="btn btn-primary" href="{{route('products.mycart')}}"> Cart </a>
