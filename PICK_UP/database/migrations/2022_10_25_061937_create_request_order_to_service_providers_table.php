@@ -14,12 +14,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('request_order_to_service_providers', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->string('productName');
+            $table->increments('id');
+       
+            $table->string('productname');
             $table->string('quantity');
-            $table->string('details');
-            $table->string('deliverSystem');
+            $table->string('productdetails');
+            $table->string('address');
+            $table->string('phone');
+            $table->string('email');
+            
+
+            $table->timestamps();
         });
     }
 

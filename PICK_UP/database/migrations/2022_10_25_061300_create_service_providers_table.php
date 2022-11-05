@@ -14,13 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('service_providers', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->increments('id');
+            
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
             $table->string('address');
             $table->string('mobileNumber');
+            $table->timestamps();
         });
     }
 

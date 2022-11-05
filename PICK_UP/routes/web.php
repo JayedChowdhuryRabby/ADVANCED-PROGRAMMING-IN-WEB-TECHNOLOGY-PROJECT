@@ -6,6 +6,8 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ServiceProviderController;
+use App\Http\Controllers\RequestOrderToServiceProviderController;
 use App\Http\Controllers\AdminController;
 
 /*
@@ -27,6 +29,14 @@ Route::post('/customerCreate',[CustomerController::class, 'customerCreateSubmitt
 Route::get('/login',[LoginController::class,'login'])->name('login');
 Route::post('/login',[LoginController::class,'loginSubmit'])->name('login');
 Route::get('/logout',[LoginController::class,'logout'])->name('logout');
+//service provider
+Route::get('/serviceprovidercreate', [ServiceProviderController::class, 'create'])->name('serviceprovidercreate');
+Route::post('/serviceprovidercreate',[ServiceProviderController::class, 'createsubmitted'])->name('createsubmitted');
+//order request
+Route::get('/createRorder', [RequestOrderToServiceProviderController::class, 'createRorder'])->name('createRorder');
+Route::post('/createRorder',[RequestOrderToServiceProviderController::class, 'createRordersubmitted'])->name('createRordersubmitted');
+//list of order
+Route::get('/serviceprovidercreate/requestOrderList', [RequestOrderToServiceProviderController::class,'requestOrderList'])->name('requestOrderList');
 
 // Add Product
 Route::get('/addProduct',[ProductController::class,'addProduct'])->name('addProduct');
@@ -45,6 +55,8 @@ Route::get('/customer/myorders/details',[CustomerController::class,'orderdetails
 
 Route::get('/customer/dash', [CustomerController::class,'customerDash'])->name('customerDash')->middleware('ValidCustomer');
 Route::get('/client/dash', [clientController::class,'clientDash'])->name('clientDash');
+Route::get('/serviceProvider/dash', [ServiceProviderController::class,'serviceDash'])->name('serviceDash');
+//admin
 Route::get('/admin/dash', [AdminController::class,'adminDash'])->name('adminDash');
 Route::get('/admin/clientList', [AdminController::class,'clientList'])->name('clientList');
 Route::get('/admin/customerList', [AdminController::class,'customerList'])->name('customerList');

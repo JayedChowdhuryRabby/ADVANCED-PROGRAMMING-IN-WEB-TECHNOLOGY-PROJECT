@@ -95,7 +95,8 @@ class AdminController extends Controller
         //$customers = Student::paginate(3);
         return view('admin.clientList')->with('clients', $clients);
 
-    }  public function customerList(){
+    }  
+    public function customerList(){
         $customers = Customer::all(); 
         //$customers = Student::paginate(3);
         return view('admin.customerList')->with('customers', $customers);

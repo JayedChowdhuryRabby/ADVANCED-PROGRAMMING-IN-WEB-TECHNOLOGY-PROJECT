@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Customer;
 use App\Models\RequestOrderToServiceProvider;
 use App\Http\Requests\StoreRequestOrderToServiceProviderRequest;
 use App\Http\Requests\UpdateRequestOrderToServiceProviderRequest;
-
+use Illuminate\Http\Request;
 class RequestOrderToServiceProviderController extends Controller
 {
     /**
@@ -83,4 +83,40 @@ class RequestOrderToServiceProviderController extends Controller
     {
         //
     }
+
+    public function createRorder(){
+        
+        $message = "";
+        return view('orderRequest.createRorder')->with('message', $message);
+    }
+    
+    public function createRordersubmitted(Request $request)
+    {
+        $validate = $request->validate([
+            "productname"=>"required|min:5|max:20",
+            //"id"=>"required",
+            'quantity'=>'required',
+            'email'=>'email',
+        ],
+        ['productname.required'=>"Please put you product name here"]
+    );
+        $requestOrderToServiceProvider = new  RequestOrderToServiceProvider();
+        $requestOrderToServiceProvider->productname = $request->productname;
+        $requestOrderToServiceProvider->quantity = $request->quantity;
+        $requestOrderToServiceProvider->productdetails = $request->productdetails;
+        $requestOrderToServiceProvider->address=$request->address;
+        $requestOrderToServiceProvider->phone=$request->phone;
+        $requestOrderToServiceProvider->email = $request->email;
+        
+        $requestOrderToServiceProvider->save();
+
+        return redirect('customer/dash');
+    }
+
+    public function requestOrderList(){
+        $requestOrderToServiceProviders = RequestOrderToServiceProvider::all(); 
+        return view('service.requestOrderList')->with('requestOrderToServiceProviders', $requestOrderToServiceProviders);
+
+    }  
+
 }

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\Client;
 use App\Models\Admin;
+use App\Models\ServiceProvider;
 class LoginController extends Controller
 {
     /**
@@ -120,6 +121,16 @@ class LoginController extends Controller
         $request->session()->put('id',$client->id);
         return redirect()->route('clientDash');
         }
+        
+        $serviceProvider= ServiceProvider::where('email',$request->email)
+        ->where('password',$request->password)
+        ->first();
+
+        if($serviceProvider){
+        $request->session()->put('userserviceProvider',$serviceProvider->name);
+        $request->session()->put('id',$serviceProvider->id);
+        return redirect()->route('serviceDash');
+        }
                 
         return back();
     }
@@ -128,6 +139,7 @@ class LoginController extends Controller
         session()->forget('user');
         session()->forget('userClient');
         session()->forget('userAdmin');
+        session()->forget('userserviceProvider');
         return redirect()->route('login');
     }
     
