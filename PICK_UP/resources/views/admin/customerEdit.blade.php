@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<h2>Edit Student</h2>
+<h2>Edit Customer</h2>
 <form action="{{route('customerEdit')}}" class="form-group" method="post">
     <!-- Cross Site Request Forgery-->
     {{csrf_field()}}
