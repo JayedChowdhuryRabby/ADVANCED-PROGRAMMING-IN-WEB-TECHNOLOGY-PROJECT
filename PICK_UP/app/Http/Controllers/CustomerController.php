@@ -112,7 +112,7 @@ class CustomerController extends Controller
         $customer->phone=$request->phone;
         $customer->save();
 
-        return redirect('/home');
+        return redirect('customer.login');
     }
 
     public function customerDash(){

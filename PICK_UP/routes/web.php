@@ -17,7 +17,8 @@ use App\Http\Controllers\ProductController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/client', [ClientController::class, 'client'])->name('clientCreate');
+Route::get('/clientCreate', [ClientController::class, 'client'])->name('clientCreate');
+Route::post('/clientCreate',[ClientController::class, 'clientCreateSubmitted'])->name('clientCreateSubmitted');
 //customer registration
 Route::get('/customerCreate', [CustomerController::class, 'customer'])->name('customerCreate');
 Route::post('/customerCreate',[CustomerController::class, 'customerCreateSubmitted'])->name('customerCreateSubmitted');
@@ -41,3 +42,4 @@ Route::get('/customer/myorders',[CustomerController::class,'myorders'])->middlew
 Route::get('/customer/myorders/details',[CustomerController::class,'orderdetails'])->middleware('ValidCustomer')->name('customer.myorders.details');
 
 Route::get('/teacher/dash', [CustomerController::class,'customerDash'])->name('customerDash')->middleware('ValidCustomer');
+Route::get('/client/dash', [clientController::class,'clientDash'])->name('clientDash');
