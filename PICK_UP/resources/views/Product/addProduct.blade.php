@@ -5,20 +5,32 @@
             @csrf
             <div class="container">
                 <div class="row ">
-            <div class="form-group">
-                    <input type="text" name="name" placeholder="Name" class="form-control">
-                </div>
-                <br>
-                <div class="form-group">
-                    <input type="number" name="price" Placeholder="Price"class="form-control">
-                </div>
+           
+    <div class="form-group">
+        <span>Product Name</span>
+        <input type="text" name="name" value="{{old('name')}}" class="form-control">
+        @error('name')
+            <span class="text-danger">{{$message}}</span>
+        @enderror
+    </div>
+    <br>
+    <div class=" form-group">
+        <span>Product Price</span>
+        <input type="number" name="price" value="{{old('price')}}" class="form-control">
+        @error('price')
+            <span class="text-danger">{{$message}}</span>
+        @enderror
+        <br>
+    </div>
 
+                <br>
                 <br>
                 <div class="form-group">
                     <input type="file" name="image" class="form-control">
                 </div>
 
-                <br>
+</br>
+<br>
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">Upload</button>
                 </div>

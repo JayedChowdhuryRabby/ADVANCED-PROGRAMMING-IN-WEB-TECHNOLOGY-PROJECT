@@ -117,7 +117,7 @@ class LoginController extends Controller
 
         if($client){
         $request->session()->put('userClient',$client->name);
-
+        $request->session()->put('id',$client->id);
         return redirect()->route('clientDash');
         }
                 
