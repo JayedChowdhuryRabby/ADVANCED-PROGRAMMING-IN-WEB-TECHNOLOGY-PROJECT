@@ -9,6 +9,7 @@ use App\Http\Controllers\ServiceProviderController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthControllerClient;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -25,8 +26,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('/products/list',[ProductController::class,'APIList']);
 Route::post('/products/list',[ProductController::class,'APIPost']);
-
+//Customer Register
 Route::post('register',[AuthController::class,'register']);
 Route::post('login',[AuthController::class,'login']);
 Route::post('logout',[AuthController::class,'logout']);
 
+
+//Client Register
+Route::post('clientregister',[AuthControllerClient::class,'clientregister']);

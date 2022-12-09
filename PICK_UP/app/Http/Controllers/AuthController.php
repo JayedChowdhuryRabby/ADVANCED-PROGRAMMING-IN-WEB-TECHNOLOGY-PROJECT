@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use App\Models\Client;
 use App\Models\Token;
 use DateTime;
 use Illuminate\Support\Str;
@@ -59,6 +60,7 @@ class AuthController extends Controller
     public function  login(Request $request){
      
         $customer = Customer::where('email',$request->email)->where('password',$request->password)->first();
+    
         if($customer){
             $api_token = Str::random(64);
             $token = new Token();
@@ -68,7 +70,23 @@ class AuthController extends Controller
             $token->save();
             return $token;
         }
+        else
+        {
+            $client = Client::where('email',$request->email)->where('password',$request->password)->first();
+            if($client){
+            $api_token = Str::random(64);
+            $token = new Token();
+            $token->userid = $client->id;
+            $token->token = $api_token;
+            $token->created_at = new DateTime();
+            $token->save();
+            return $token;
+        }
+       
         return "No user found";
+    }
+
+        
 
     }
     public function  logout(Request $req){
