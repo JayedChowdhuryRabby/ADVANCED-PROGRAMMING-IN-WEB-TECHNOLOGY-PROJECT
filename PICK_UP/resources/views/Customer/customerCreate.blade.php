@@ -1,7 +1,7 @@
 @extends('layouts.app')
 <br>
 @section('content')
-<h2></h2>
+<h2>Customer Registration</h2>
 <form action="{{route('customerCreate')}}" class="form-group" method="post">
     <!-- Cross Site Request Forgery-->
     {{csrf_field()}}

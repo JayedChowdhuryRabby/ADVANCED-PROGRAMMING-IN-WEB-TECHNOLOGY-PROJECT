@@ -10,6 +10,7 @@ use App\Models\Customer;
 use App\Models\Client;
 use App\Models\Admin;
 use App\Models\ServiceProvider;
+use DateTime;
 class LoginController extends Controller
 {
     /**
@@ -142,5 +143,21 @@ class LoginController extends Controller
         session()->forget('userserviceProvider');
         return redirect()->route('login');
     }
-    
+
+    //public function loginApi(Request $req)
+    //{
+       // $user=Customer:: where('email',$req->email)->where('password',$req->password)->first();
+        //if(!$user)
+        //{
+           // return ["error"=>"Email or Password is not matched"];
+        //}
+        //return $user;
+   // }
 }
+
+       
+    
+    
+
+
+

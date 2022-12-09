@@ -134,6 +134,21 @@ class CustomerController extends Controller
         return view('customer.orderdetails')->with('order',$order);
     }
 
+    public function register(Request $req)
+    {
+        $customer=new Customer();
+        $customer->name=$req->name;
+        $customer->customer_id = $req->customer_id;
+        $customer->email = $req->email;
+        $customer->password=$req->password;
+        $customer->address=$req->address;
+        $customer->phone=$req->phone;
+
+        $customer->save();
+        return $customer;
+
+    }
+
     
 }
 

@@ -52,7 +52,7 @@
 							</div>
 			</div>
 			<div class="form-group">
-				<button type="submit" class="btn btn-primary rounded submit p-3 px-5">Login</button>
+				<button type="submit" name ="login" class="btn btn-primary rounded submit p-3 px-5">Login</button>
 			</div>
 			</form>	
 	        </div>

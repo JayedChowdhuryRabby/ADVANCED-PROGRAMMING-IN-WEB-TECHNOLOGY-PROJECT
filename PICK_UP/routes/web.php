@@ -71,7 +71,3 @@ Route::get('/customerEdit/{customer_id}',[AdminController::class, 'customerEdit'
 Route::post('/customerEdit',[AdminController::class, 'customerEditSubmitted'])->name('customerEdit');
 
 
-
-
-
-
