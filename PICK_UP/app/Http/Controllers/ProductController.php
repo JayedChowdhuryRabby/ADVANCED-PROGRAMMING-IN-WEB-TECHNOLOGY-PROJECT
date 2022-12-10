@@ -8,7 +8,8 @@ use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Orderdetail;
-
+use Illuminate\Support\Facades\Validator;
+use Intervention\Image\ImageManagerStatic as Image;
 class ProductController extends Controller
 {
     /**
@@ -168,7 +169,7 @@ class ProductController extends Controller
 
         if($request->hasFile('image')){
             $imageName = time()."_".$request->file('image')->getClientOriginalName();
-            // return $imageName;
+
             $request->image->move(public_path('images'), $imageName);
             $p->image=$imageName;
             $p->save();
@@ -184,6 +185,47 @@ class ProductController extends Controller
 
         return redirect()->route('products.list');
     }
+
+
+    public function product(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            "name"=>"required|min:5|max:30",
+            'price'=>'required',
+            //'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image'=>'required',
+    
+
+        ]);
+        if ($validator->fails())
+        {
+            return response()->json([
+                'validation_errors'=>$validator->messages(),
+
+            ]);
+        }
+        else
+        {
+           $po= new Product;
+           $po->name=$request->input('name');
+           $po->price=$request->input('price');
+           $po->image=$request->input('image');
+           $po->save();
+         
+
+        }
+    }
+
+    public function ProductList(){
+
+        $products = Product::all();
+        return response()->json([
+            'status'=>200,
+            'products'=>$products
+        ]);
+      
+    }
+
     
     
 }

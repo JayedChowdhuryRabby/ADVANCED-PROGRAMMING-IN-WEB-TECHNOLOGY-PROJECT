@@ -30,7 +30,11 @@ Route::post('/products/list',[ProductController::class,'APIPost']);
 Route::post('register',[AuthController::class,'register']);
 Route::post('login',[AuthController::class,'login']);
 Route::post('logout',[AuthController::class,'logout']);
+Route::post('addtocart',[AuthController::class,'addtocart']);
+
 
 
 //Client Register
 Route::post('clientregister',[AuthControllerClient::class,'clientregister']);
+Route::post('product',[ProductController::class,'product']);
+Route::get('ProductList',[ProductController::class,'ProductList']);
