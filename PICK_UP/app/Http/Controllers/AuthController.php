@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\Client;
 use App\Models\Token;
+use App\Models\Admin;
 use DateTime;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -57,9 +58,12 @@ class AuthController extends Controller
     }
 
    
-    public function  login(Request $request){
+    public function  login(Request $request)
+    {
      
         $customer = Customer::where('email',$request->email)->where('password',$request->password)->first();
+        $client = Client::where('email',$request->email)->where('password',$request->password)->first();
+        $admin = Admin::where('email',$request->email)->where('password',$request->password)->first();
     
         if($customer){
             $api_token = Str::random(64);
@@ -68,25 +72,41 @@ class AuthController extends Controller
             $token->token = $api_token;
             $token->created_at = new DateTime();
             $token->save();
-            return $token;
+            return "Customer found";
         }
-        else
+        else if($client)
         {
-            $client = Client::where('email',$request->email)->where('password',$request->password)->first();
-            if($client){
+           
+            
+
             $api_token = Str::random(64);
             $token = new Token();
             $token->userid = $client->id;
             $token->token = $api_token;
             $token->created_at = new DateTime();
             $token->save();
-            return $token;
+            return "Client found";
         }
-       
-        return "No user found";
-    }
+        else if($admin)
+        {    
+            
+            $api_token = Str::random(64);
+            $token = new Token();
+            $token->userid = $admin->id;
+            $token->token = $api_token;
+            $token->created_at = new DateTime();
+            $token->save();
+            return "Admin found";
 
         
+       
+          
+        }
+        else
+        {
+            return "No user found";
+
+        }
 
     }
     public function  logout(Request $req){
