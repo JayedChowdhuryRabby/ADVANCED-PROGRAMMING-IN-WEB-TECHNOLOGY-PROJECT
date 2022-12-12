@@ -210,7 +210,9 @@ class ProductController extends Controller
            $po->name=$request->input('name');
            $po->price=$request->input('price');
            $po->image=$request->input('image');
+           //$po->image=$request->file('image')->store('image');
            $po->save();
+           return $po;
          
 
         }
@@ -225,6 +227,8 @@ class ProductController extends Controller
         ]);
       
     }
+
+
 
     
     

@@ -98,4 +98,13 @@ class AuthController extends Controller
             return $token;
         }
 }
+public function CustomerList(){
+
+    $customers = Customer::all();
+    return response()->json([
+        'status'=>200,
+        'clients'=>$customers
+    ]);
+  
+}
 }

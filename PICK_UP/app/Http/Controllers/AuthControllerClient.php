@@ -57,6 +57,16 @@ class AuthControllerClient extends Controller
         }
     }
 
+    public function ClientList(){
+
+        $clients = Client::all();
+        return response()->json([
+            'status'=>200,
+            'clients'=>$clients
+        ]);
+      
+    }
+
    
    
 }
